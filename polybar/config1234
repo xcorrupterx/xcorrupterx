@@ -1,10 +1,9 @@
 [colors]
 background = {color0}
 foreground = {color15}
-active = {active}
+active = {color3}
 inactive = {inactive}
 highlight = {color1}
-primary = {color15}
 error = {color4}
 
 [bar/main]
@@ -34,17 +33,18 @@ module-margin-left = 0
 module-margin-right = 0
 
 font-0 = Iosevka Nerd Font:size=8
+font-1 = "Font Awesome 5 Brands:style=regular:pixelsize=9:antialias=true;2"
 
 locale = en_IN.UTF-8
 enable-ipc = true
 
 modules-left = time date gap spotify
-modules-center = bspwm gap xwindow
+modules-center = bspwm xwindow
 modules-right = battery gap wlan netact gap volume powermenu
 
 tray-position = none
 tray-padding = 10
-tray-background = ${{colors.inactive}}
+tray-background = ${{colors.background}}
 
 [module/gap]
 type = custom/text
@@ -55,7 +55,8 @@ content-padding = 0
 
 [module/xwindow]
 type = internal/xwindow
-format-background = ${{colors.highlight}}
+format-background = ${{colors.foreground}}
+format-foreground = ${{colors.background}}
 format-padding = 1
 label = %title:0:20: ...%
 
@@ -67,7 +68,7 @@ interval = 1.0
 
 format-connected = <label-connected>
 format-connected-padding = 1
-format-connected-background = ${{colors.active}}
+format-connected-background = ${{colors.error}}
 format-connected-foreground = ${{colors.foreground}}
 
 format-disconnected =
@@ -83,8 +84,7 @@ format-connected-padding = 1
 format-connected = <ramp-signal> <label-connected>
 label-connected = %essid%
 format-connected-background = ${{colors.active}}
-format-connected-foreground = ${{colors.inactive}}
-
+foremat-connected-foreground = ${{colors.background}}
 format-disconnected =
 
 ramp-signal-0 = 
@@ -97,8 +97,9 @@ interval = 5
 time = " %I:%M %p"
 
 format-padding = 1
-format-background = ${{colors.background}}
-format-foreground = ${{colors.foreground}}
+format-background = ${{colors.foreground}}
+format-foreground = ${{colors.error}}
+
 label = %time%
 
 [module/date]
@@ -108,7 +109,7 @@ interval = 5
 date = " %A, %d %B"
 
 format-padding = 1
-format-background = ${{colors.background}}
+format-background = ${{colors.error}}
 format-foreground = ${{colors.foreground}}
 label = %date%
 
@@ -125,7 +126,7 @@ ramp-volume-3 = 
 ramp-volume-foreground = ${{colors.foreground}}
 
 format-muted-prefix = " "
-format-muted-foreground = ${{colors.active}}
+format-muted-foreground = {color15}
 format-muted-background = ${{colors.error}}
 label-muted = MUTE
 format-muted-padding = 1
@@ -167,6 +168,8 @@ screenchange-reload = true
 [global/wm]
 margin-top = 0
 margin-bottom = 0
+
+; vim:ft=dosini
 
 [module/bspwm]
 type = internal/bspwm
@@ -215,15 +218,12 @@ format-spacing = 1
 label-active-font = 0
 
 label-open = ⏻ 
-label-open-foreground = ${{colors.foreground}}
-label-open-background = ${{colors.background}}
+label-open-foreground = ${colors.primary}
 label-close =  
-label-close-foreground = ${{colors.foreground}}
-label-close-background = ${{colors.background}}
+label-close-foreground = ${colors.primary}
 label-separator = |
-label-separator-foreground = ${{colors.foreground}}
-label-separator-background = ${{colors.background}}
-label = ${{colors.primary}}
+label-separator-foreground = ${colors.primary}
+label = ${colors.primary}
 
 menu-0-1 = 
 menu-0-1-exec = shutdown -r now

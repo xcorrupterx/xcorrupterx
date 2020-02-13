@@ -1,9 +1,10 @@
 [colors]
 background = {color0}
 foreground = {color15}
-active = {color3}
+active = {active}
 inactive = {inactive}
 highlight = {color1}
+primary = {color15}
 error = {color4}
 
 [bar/main]
@@ -38,12 +39,12 @@ locale = en_IN.UTF-8
 enable-ipc = true
 
 modules-left = time date gap spotify
-modules-center = bspwm xwindow
-modules-right = battery gap wlan netact gap volume
+modules-center = bspwm gap xwindow
+modules-right = battery gap wlan netact gap volume powermenu
 
 tray-position = none
 tray-padding = 10
-tray-background = ${{colors.background}}
+tray-background = ${{colors.inactive}}
 
 [module/gap]
 type = custom/text
@@ -54,8 +55,7 @@ content-padding = 0
 
 [module/xwindow]
 type = internal/xwindow
-format-background = ${{colors.foreground}}
-format-foreground = ${{colors.background}}
+format-background = ${{colors.highlight}}
 format-padding = 1
 label = %title:0:20: ...%
 
@@ -67,7 +67,7 @@ interval = 1.0
 
 format-connected = <label-connected>
 format-connected-padding = 1
-format-connected-background = ${{colors.error}}
+format-connected-background = ${{colors.active}}
 format-connected-foreground = ${{colors.foreground}}
 
 format-disconnected =
@@ -83,7 +83,8 @@ format-connected-padding = 1
 format-connected = <ramp-signal> <label-connected>
 label-connected = %essid%
 format-connected-background = ${{colors.active}}
-foremat-connected-foreground = ${{colors.background}}
+format-connected-foreground = ${{colors.inactive}}
+
 format-disconnected =
 
 ramp-signal-0 = 
@@ -96,9 +97,8 @@ interval = 5
 time = " %I:%M %p"
 
 format-padding = 1
-format-background = ${{colors.foreground}}
-format-foreground = ${{colors.error}}
-
+format-background = ${{colors.background}}
+format-foreground = ${{colors.foreground}}
 label = %time%
 
 [module/date]
@@ -108,7 +108,7 @@ interval = 5
 date = " %A, %d %B"
 
 format-padding = 1
-format-background = ${{colors.error}}
+format-background = ${{colors.background}}
 format-foreground = ${{colors.foreground}}
 label = %date%
 
@@ -125,7 +125,7 @@ ramp-volume-3 = 
 ramp-volume-foreground = ${{colors.foreground}}
 
 format-muted-prefix = " "
-format-muted-foreground = {color15}
+format-muted-foreground = ${{colors.active}}
 format-muted-background = ${{colors.error}}
 label-muted = MUTE
 format-muted-padding = 1
@@ -168,8 +168,6 @@ screenchange-reload = true
 margin-top = 0
 margin-bottom = 0
 
-; vim:ft=dosini
-
 [module/bspwm]
 type = internal/bspwm
 
@@ -207,3 +205,28 @@ format = <label>
 exec = python ~/.config/polybar/spotify.py -f '{{song}} {{paused}}' -t 60
 ;format-background = ${{colors.foreground}}
 ;format-foreground = ${{colors.error}}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = false
+
+format-spacing = 1
+label-active-font = 0
+
+label-open = ⏻ 
+label-open-foreground = ${{colors.foreground}}
+label-open-background = ${{colors.background}}
+label-close =  
+label-close-foreground = ${{colors.foreground}}
+label-close-background = ${{colors.background}}
+label-separator = |
+label-separator-foreground = ${{colors.foreground}}
+label-separator-background = ${{colors.background}}
+label = ${{colors.primary}}
+
+menu-0-1 = 
+menu-0-1-exec = shutdown -r now
+
+menu-0-0 = "⏻ "
+menu-0-0-exec = shutdown -h now
