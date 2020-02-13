@@ -83,5 +83,3 @@ super + b
 
 super + c
 	configopen	
-super + j
-	configopen	
