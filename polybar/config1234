@@ -3,6 +3,7 @@ background = {color0}
 foreground = {color15}
 active = {color3}
 inactive = {inactive}
+primaty -= {color15}
 highlight = {color1}
 error = {color4}
 
@@ -213,20 +214,22 @@ exec = python ~/.config/polybar/spotify.py -f '{{song}} {{paused}}' -t 60
 type = custom/menu
 
 expand-right = false
+module-margin = "  "
 
 format-spacing = 1
 label-active-font = 0
 
 label-open = ⏻ 
-label-open-foreground = ${colors.primary}
+label-open-foreground = ${{colors.foreground}}
+label-open-background = ${{colors.background}}
 label-close =  
-label-close-foreground = ${colors.primary}
+label-close-foreground = ${{colors.foreground}}
 label-separator = |
 label-separator-foreground = ${colors.primary}
-label = ${colors.primary}
+label = ${{colors.primary}}
 
 menu-0-1 = 
 menu-0-1-exec = shutdown -r now
 
 menu-0-0 = "⏻ "
-menu-0-0-exec = shutdown -h now
+menu-0-0-exec = shutdown -h no
